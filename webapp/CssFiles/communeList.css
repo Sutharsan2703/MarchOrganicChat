@@ -1,0 +1,133 @@
+@charset "ISO-8859-1";
+@import
+	url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+	;
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	font-size: 15px;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	 background-color: rgb(128, 0, 255);
+
+}
+
+/*section css start  */
+.section-1{
+	display: flex;
+}
+th{
+		font-weight:bold;
+}
+
+
+
+table, th, td {
+margin-left:190px;
+  border: 1px solid   #8080ff;
+  border-top:medium;
+  border-width:20px;
+  border-collapse:collapse;
+}
+th, td {
+  background-color: white;
+}
+
+
+.whi{
+	background-color: white;
+}
+
+/* section    */
+.whole {
+   
+    padding: 1px;
+    margin-top: -50px;
+}
+
+.part1{
+    width: 10%;
+   
+}  
+
+
+
+/* Toggle bar practice*/
+
+/* The sidepanel menu */
+.sidepanel {
+	
+	 width: 0; /* 0 width - change this with JavaScript */
+ display:inline-block;
+  background-color: rgb(128, 0, 255); 
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-left: 10px; /* Place content from the left */
+ 
+}
+
+/* The sidepanel links */
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: rgb(0, 0, 160);
+  display: flex;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+	display:flex;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn , .closebtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color:rgb(64, 128, 128);
+  color: white;
+  padding: 10px ;
+ 
+  
+}
+
+.closebtn1 {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  padding: 10px ;
+ size: 10px;
+  
+}
+.openbtn:hover ,.closebtn:hover {
+  background-color: #444;
+}
+
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}
+

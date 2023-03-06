@@ -1,0 +1,188 @@
+@charset "ISO-8859-1";
+title{
+    background-color: white;
+}
+h1{
+   /* background-color: rgb(40, 7, 156); */
+/*  background-color: rgb(252, 252, 252);*/
+align-content: left;
+   opacity: 100%;
+margin-top:10px;
+/*padding-top: 10px;*/
+text-shadow: 2.5px 2.5px 2.5px blueviolet;
+
+  color: #9d9db0;
+    font-size: 2.5cm;
+}
+
+.container1{
+	background-color:gray;
+    display: flex;
+    margin: auto;
+}
+th{
+	
+  background-color: #8000ff;
+ 
+		font-weight:bold;
+}
+
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr:hover {background-color: #00ff40;}
+
+table, th, td {
+	text-align:center;
+	
+  border: 1px solid   #8080c0;
+  border-top:medium;
+  border-width:20px;
+  border-collapse: collapse;
+}
+
+
+th, td {
+  background-color: white;
+}
+
+td h3{
+	background-color: Green;
+    color: White;
+    font-size: 25px;
+}
+
+
+.container{
+  float: center;
+  width: 800px;
+  height: 400px;
+ /* margin-top: 80px;
+  margin-bottom:100px;
+  margin-left: 100px;
+  margin-right: 100px;*/
+  margin:auto;
+  border-radius: 90px;
+  box-shadow: 10px 10px 10px rgb(116, 106, 109);
+  background-color: aliceblue;
+   opacity: 70%;
+   font-family: inherit;
+} 
+
+
+.containertest{
+  float: right;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  width: 800px;
+  height: 700px;
+  
+  
+  
+ margin-top: auto;
+  margin-bottom:100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(116, 106, 109);
+  background-color: aliceblue;
+   opacity: 50%;
+}
+
+body{
+    background-position: right center;
+ 	background-color: grey, #0aec95;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body .image {
+    position:absolute;
+    left:50%;
+    background-image: url('Images/chatimg7.gif');
+    width:774px;
+    height:759px;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+h2{
+ /*   background-color: rgb(40, 7, 156); */
+
+  /* background-color: rgb(10, 102, 38);
+padding-bottom: 10px;
+    color: rgb(43, 219, 60);
+    color: rgb(85, 219, 245);*/
+    color:#8080ff ;
+   
+   
+}
+h3{
+    background-color: white;
+    color: blue;
+    font-size: 2.5cm;
+}
+
+abbr:hover{
+	background: green;
+	margin:auto;
+    border-radius: 10px;
+}
+
+.menu-bar{
+    background:rgb(25, 9, 190);
+    text-align: center;
+    border-radius: 10px;
+    height: auto;
+}
+.menu-bar ul{
+    display: inline-flex;
+    list-style: none;
+}
+.menu-bar ul li{
+    width: 200px;
+ 	height:auto;
+}
+
+.menu-bar ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+.active, .menu-bar ul li:hover{
+    background: #1479ed;
+    border-radius: 20px;
+}
+
+.ccenter{
+	position: absolute;
+	margin: auto;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	width:0px;
+	height:0px;
+	background-color:#42a5f5;
+	
+}
+
+.whi{
+	background-color: white;
+}
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}
+
+/*Used on receiving message Jsp*/
+.center1{
+	width:100%;
+	text-align: center;	
+}

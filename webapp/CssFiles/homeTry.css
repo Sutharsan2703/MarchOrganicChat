@@ -1,0 +1,156 @@
+@charset "ISO-8859-1";title{
+    background-color: white;
+}
+
+
+body .containertest{
+	background-image:url("/Images/giphy.gif");
+  float: center;
+  width: 600px;
+  height: 330px;
+  margin-top: 5px;
+  margin-bottom:auto;
+  margin-left: auto;
+  margin-right: auto;
+ /* margin:auto;*/
+  border-radius: 90px;
+  box-shadow: 8px 8px 8px rgb(116, 106, 109);
+  background-color: aliceblue;
+   opacity: 100%;
+   font-family: inherit;
+} 
+
+
+.containertest2{
+  float: center;
+  width: 600px;
+  height: 330px;
+  margin-top: 5px;
+  margin-bottom:auto;
+  margin-left: auto;
+  margin-right: auto;
+ /* margin:auto;*/
+  border-radius: 90px;
+  
+  background-color: aliceblue;
+   opacity: 80%;
+   font-family: sans-serif;
+} 
+
+.containertest3{
+	background-image:url("/Images/connect.gif");
+  float: center;
+  width: 800px;
+  height: 500px;
+  margin-top: 20px;
+  margin-bottom:auto;
+  margin-left: auto;
+  margin-right: auto;
+ /* margin:auto;*/
+  border-radius: 90px;
+  box-shadow: 10px 10px 10px rgb(116, 106, 109);
+  background-color: aliceblue;
+   opacity: 100%;
+   font-family: inherit;
+} 
+
+
+
+
+.container{
+  float: right;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  width: 800px;
+  height: 700px;
+  
+  
+  
+ margin-top: auto;
+  margin-bottom:100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(116, 106, 109);
+  background-color: aliceblue;
+   opacity: 50%;
+}
+
+
+body{
+	
+	background-image:url("/Images/connect.gif");
+    background-position: right ,left;
+ 	background-color: #0aec95;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+h1 :hover{
+	background-color:highlighttext;
+	font-family: monospace;
+	font-size: 50px;
+	font-weight: bolder;
+	
+}
+
+h4{
+ 	font:status-bar;
+ 	font-weight:600;
+ 	font-size: 5mm;
+	background-color:orange;
+	border-radius: 30px;
+}
+
+
+div {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: example;
+  animation-duration: 30s;
+  	animation-iteration-count:10;
+  
+}
+
+@keyframes example {
+  from {background-color:skyblue;}
+  to {background-color: green;}
+}
+
+
+.button {
+
+background-color:purple; /* Blue */
+border: none;
+color: white;
+text-align: center;
+text-decoration: none;
+display:block;
+
+
+}
+
+/*
+button {
+	border-radius: 80%;
+	
+}
+*/
+.button :hover{
+	 background: green;
+  
+}
+
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}
+

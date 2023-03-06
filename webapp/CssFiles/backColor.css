@@ -1,0 +1,52 @@
+@charset "ISO-8859-1";
+
+
+html {
+	font-size: 15px;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color:white;
+	
+
+}
+
+.container1 {
+	float: center;
+	display: flex;
+	margin: auto;
+	border-radius: 50px;
+	/* box-shadow: 10px 10px 10px rgb(116, 106, 109);*/
+	box-shadow:  inset 0 0 15px -2px #444444;
+	background-color: aliceblue;
+	font-family: inherit;
+}
+
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing:
+			border-box;
+  border: 2px solid
+			#ccc;
+  border-radius: 4px;
+  background-color:#f8f8f8;
+  font-size: 16px;
+  resize:none;
+}
+	
+
+

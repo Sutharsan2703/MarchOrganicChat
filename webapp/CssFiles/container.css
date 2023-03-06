@@ -1,0 +1,60 @@
+@charset "ISO-8859-1";
+
+.container {
+	float: center;
+	width: 800px;
+	height: 400px;
+	/* margin-top: 80px;
+  margin-bottom:100px;
+  margin-left: 100px;
+  margin-right: 100px;*/
+	margin: auto;
+	border-radius: 90px;
+	box-shadow: 10px 10px 10px rgb(116, 106, 109);
+	background-color: aliceblue;
+	opacity: 70%;
+	font-family: inherit;
+}
+
+.col {
+	background-color: silver;
+	position: inherit;
+}
+
+.container2 {
+	float: center;
+	display: inline-flex;
+	margin: auto;
+	border-radius: 20px;
+	/* box-shadow: 10px 10px 10px rgb(116, 106, 109);*/
+	box-shadow: 0 0 15px -2px #444444;
+	background-color: aliceblue;
+	font-family: inherit;
+}
+
+/*     Used in Login Page*/
+.container3 {
+	 align-items:center;
+	float: center;
+	display:inline-flex;
+	/* margin-top: 80px;
+  margin-bottom:100px;
+  margin-left: 100px;
+  margin-right: 100px;*/
+	margin: auto;
+	border-radius: 90px;
+	box-shadow: 0 0 15px -2px #444444;
+	background-color: aliceblue;
+	opacity: 80%;
+	font-family: inherit;
+}
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}

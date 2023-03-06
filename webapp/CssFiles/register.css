@@ -1,0 +1,47 @@
+@charset "ISO-8859-1";
+
+body {
+	align-content:center;
+	text-align:center;
+	background-image: url(/Images/connectgif.gif);
+	font-family: Calibri;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+	width: 250px;
+}
+
+input[type="submit"], input[type="reset"] {
+	width: 70px;
+	height: 30px;
+	position: relative;
+}
+
+form {
+	text-align: center;
+	font-family: Calibri;
+	font-size: 20px;
+	border: 3px solid black;
+	width: 600px;
+	margin: 20px auto;
+}
+
+span {
+	color:red;
+    font-size:small;
+	text-align: right;
+	font-weight: bold;
+	
+	
+}
+
+.right{
+	text-align: right;	
+}
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;	
+}
+
