@@ -26,51 +26,51 @@ public class LoginDaoImpl implements LoginDao {
 
 	Logger logger = LoggerFactory.getLogger(LoginDaoImpl.class);
 
-	
-	public Boolean login(String userName,String password,HttpSession session) throws LoginInvalidException {
+	public Boolean login(String userName, String password, HttpSession session) throws LoginInvalidException {
 
 		String query = "select name,password from register where userName=? ";
-		
+
 		List<Login> listToLog = jdbcTemplate.query(query, new LoginMapper(), userName);
 		for (Login login : listToLog) {
-		
+
 			String rPassword = login.getLoginPassword();
-			String name=login.getLoginName();
-			
+			String name = login.getLoginName();
+
 			if (!rPassword.equals(password)) {
 
 				throw new LoginInvalidException();
 			} else {
-				
+
 				logger.info("Continue");
-	            session.setAttribute("userName", userName);
-	            session.setAttribute("name",name );
-	            
+				session.setAttribute("userName", userName);
+				session.setAttribute("userName1", userName);
+				session.setAttribute("name", name);
+
 				String uList = "select userName,mailId from register order by mailId asc ";
 				List<Register> listOfUsers = jdbcTemplate.query(uList, new UserListMapper());
 
-				
-					session.setAttribute("userList", listOfUsers);
-				
-					String messageFrom = "select distinct sender,reqStatus from personalChat where receiver =?   ";
-					List<PersonalChat> listOfMessagedUsers = jdbcTemplate.query(messageFrom, new UserMessagedMapper(),userName);
-					
-					
-					session.setAttribute("userMessaged", listOfMessagedUsers);
-					
-					
-				
-				
-	            return true;
+				session.setAttribute("userList", listOfUsers);
 
+				String messageFrom = "select distinct sender,reqstatus from personalChat where receiver =?   ";
+				List<PersonalChat> listOfMessagedUsers = jdbcTemplate.query(messageFrom, new UserMessagedMapper(),
+						userName);
+
+				session.setAttribute("userMessaged", listOfMessagedUsers);
 				
+				String imgFrom = "select distinct sender,reqstatus from personalfiles where receiver =?   ";
+				List<PersonalChat> listOfImgUsers = jdbcTemplate.query(imgFrom, new UserMessagedMapper(),
+						userName);
+				
+				session.setAttribute("userImageMessaged", listOfImgUsers);
+
+				return true;
+
+			}
 		}
-		}
-		logger.error("Login Failed"); 
-		
+		logger.error("Login Failed");
+
 		return false;
 
 	}
 
 }
-

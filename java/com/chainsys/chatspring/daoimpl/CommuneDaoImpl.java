@@ -22,21 +22,20 @@ import com.chainsys.chatspring.mapper.MemberListCommuneMapper;
 import com.chainsys.chatspring.model.Commune;
 
 @Repository
-public class CommuneDaoImpl implements CommuneDao{
+public class CommuneDaoImpl implements CommuneDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	Logger logger = LoggerFactory.getLogger(CommuneDaoImpl.class);
 
-	
+//Commune creation
 	public Integer createCommune(Commune commune, HttpSession session) {
 
 		String create = "insert into commune (communeName,communeId,password,members,dateOfCreation)values(?,COMMUNESEQ.nextval,?,?,LOCALTIMESTAMP)";
 		Object[] params = { commune.getCommuneName(), commune.getPassword(), commune.getMembers() };
 
-		int rows = jdbcTemplate.update(create, params);
-
+		Integer rows = jdbcTemplate.update(create, params);
 
 		logger.info(" Row Inserted Commune");
 
@@ -55,12 +54,13 @@ public class CommuneDaoImpl implements CommuneDao{
 
 		jdbcTemplate.update(query, param);
 
-
 		logger.info(" Row Inserted to communeMembers");
 
 		return rows;
 
 	}
+
+//Join into a Commune	
 
 	public Boolean joinCommune(Commune commune) throws EntryInvalidException {
 		String query = "select password,communeName from commune where communeId=? ";
@@ -80,7 +80,6 @@ public class CommuneDaoImpl implements CommuneDao{
 
 				jdbcTemplate.update(join, params);
 
-
 				logger.info(" Row Inserted into Commune Members");
 
 				return true;
@@ -92,28 +91,32 @@ public class CommuneDaoImpl implements CommuneDao{
 
 	}
 
+//Share message and images to the Commune	
+
 	public Integer createMessage(Commune commune) {
 
 		String write = "insert into MESSAGE (COMMUNEID,SENDER,MESSAGE,docs,MESSAGETIME,views,VIEWEDBY) values (?,?,?,?,LOCALTIMESTAMP,'0','')";
 		Object[] params = { commune.getCommuneId(), commune.getSender(), commune.getMessage(), commune.getDocs() };
-		int rows = jdbcTemplate.update(write, params);
-
+		Integer rows = jdbcTemplate.update(write, params);
 
 		logger.info(" Row Inserted into Message");
 		return rows;
 
 	}
-	
-public Integer textMessage(Commune commune) {
-	String text = "insert into textMESSAGE (COMMUNEID,SENDER,MESSAGE,MESSAGETIME,views) values (?,?,?,LOCALTIMESTAMP,'0')";
-	Object[] param = { commune.getCommuneId(), commune.getSender(), commune.getMessage() };
-	int rows = jdbcTemplate.update(text, param);
 
+//Share text message to the Commune	
 
-	logger.info(" Row Inserted into Message");
-	return rows;
-		
+	public Integer textMessage(Commune commune) {
+		String text = "insert into textMESSAGE (COMMUNEID,SENDER,MESSAGE,MESSAGETIME,views) values (?,?,?,LOCALTIMESTAMP,'0')";
+		Object[] param = { commune.getCommuneId(), commune.getSender(), commune.getMessage() };
+		Integer rows = jdbcTemplate.update(text, param);
+
+		logger.info(" Row Inserted into Message");
+		return rows;
+
 	}
+
+//Check CommuneId exists - on both Commune and Commune Members database	
 
 	public Boolean communeIdExisting(Integer communeId, String sender) throws EntryInvalidException {
 
@@ -141,6 +144,8 @@ public Integer textMessage(Commune commune) {
 		return false;
 	}
 
+//List of Commune that the user is a member	
+
 	public List<Commune> listCommune(HttpSession session) {
 		String uName = (String) session.getAttribute("userName");
 		String communeList = "select distinct communeName,communeId from communeMembers where members=? ";
@@ -151,9 +156,11 @@ public Integer textMessage(Commune commune) {
 		return communeListResult;
 	}
 
+//Receive Messages from the Commune
+
 	public List<Commune> receiveCommune(HttpSession session) {
 		Integer communeId = (Integer) session.getAttribute("communeId");
-		String receive = "select SENDER,MESSAGE,docs,MESSAGETIME,COMMUNEID,views,viewedby from MESSAGE where communeId=? order by messagetime desc";
+		String receive = "select SENDER,MESSAGE,docs,to_char(messageTime,'dd-mm-yyyy hh24:mm:ss')MESSAGETIME,COMMUNEID,views,viewedby from MESSAGE where communeId=? order by views asc";
 		List<Commune> receivedCommune = jdbcTemplate.query(receive, new CommuneReceiveMapper(), communeId);
 
 		session.setAttribute("receivedCommune", receivedCommune);
@@ -167,8 +174,10 @@ public Integer textMessage(Commune commune) {
 		return receivedCommune;
 	}
 
-	public List<Commune> textReceiveCommune(HttpSession session,Integer communeId) {
-		String text = "select SENDER,MESSAGE,MESSAGETIME,COMMUNEID,views from textMESSAGE where communeId=? order by messagetime desc ";
+//Receive text messages from Commune 	
+
+	public List<Commune> textReceiveCommune(HttpSession session, Integer communeId) {
+		String text = "select SENDER,MESSAGE,to_char(messagetime,'dd-mm-yyyy hh24:mm:ss')MESSAGETIME,COMMUNEID,views from textMESSAGE where communeId=? order by views asc ";
 		List<Commune> textCommune = jdbcTemplate.query(text, new CommuneTextMapper(), communeId);
 
 		session.setAttribute("textCommune", textCommune);
@@ -180,18 +189,18 @@ public Integer textMessage(Commune commune) {
 		logger.info("Message views.. Row Updated ");
 
 		return textCommune;
-		
+
 	}
-	
-	public List<Commune> membListCommune(HttpSession session,Integer communeId) {
+
+//Commune members list	
+
+	public List<Commune> membListCommune(HttpSession session, Integer communeId) {
 		String communeList = "select distinct  members  from communeMembers where communeId=? ";
 		List<Commune> membersList = jdbcTemplate.query(communeList, new MemberListCommuneMapper(), communeId);
 
-		session.setAttribute("membersList",membersList);
+		session.setAttribute("membersList", membersList);
 
 		return membersList;
 	}
-
-	
 
 }

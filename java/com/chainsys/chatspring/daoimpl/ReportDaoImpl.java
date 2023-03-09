@@ -21,20 +21,21 @@ public class ReportDaoImpl implements ReportDao {
 
 	Logger logger = LoggerFactory.getLogger(ReportDaoImpl.class);
 
-	
+//Make report	
+
 	public Integer reportUser(Report report) {
 
-		
-		
 		String repUser = "insert into report (reportId,reportDate,reportUserName,reportContent,userName,messageId,reportstatus) values (SEQ_ID4.nextval,localtimestamp,?,?,?,?,'Report Created')";
 		Object[] params = { report.getReportUserName(), report.getReportContent(), report.getUserName(),
 				report.getMessageId() };
-		int rows = jdbcTemplate.update(repUser, params);
+		Integer rows = jdbcTemplate.update(repUser, params);
 
-		logger.info( " Row Inserted into Report");
+		logger.info(" Row Inserted into Report");
 
 		return rows;
 	}
+
+//Administrator to check report
 
 	public List<Report> check(HttpSession session) {
 
@@ -46,17 +47,20 @@ public class ReportDaoImpl implements ReportDao {
 		return checkReport;
 	}
 
+//Administrator updates on report	
+
 	public Integer reportStatus(String messageId) {
 
 		String statusUpdate = "update report set reportstatus='Warning, reply called upon ' where messageId=?";
 		Object[] params = { messageId };
-		int rows = jdbcTemplate.update(statusUpdate, params);
+		Integer rows = jdbcTemplate.update(statusUpdate, params);
 
 		logger.info(" Row updated as warning on report status by admin");
 		return rows;
 	}
 
-	
+//User to view status of the report
+
 	public List<Report> reportStatusView(HttpSession session) {
 		String userName = (String) session.getAttribute("userName");
 		String display = "select reportId,reportDate,reportUserName,reportContent,userName,messageId,reportstatus from report where userName=? order by reportDate desc";
@@ -67,10 +71,12 @@ public class ReportDaoImpl implements ReportDao {
 		return viewReport;
 	}
 
-	public Integer reportDec(String messageId,String reportUserName,String reportStatus) {
+//Updating final decision on report	
+
+	public Integer reportDec(String messageId, String reportUserName, String reportStatus) {
 		String statusUpdate = "update report set reportstatus=? where messageId=? and reportUserName=?";
-		Object[] params = { reportStatus,messageId,reportUserName };
-		int row = jdbcTemplate.update(statusUpdate, params);
+		Object[] params = { reportStatus, messageId, reportUserName };
+		Integer row = jdbcTemplate.update(statusUpdate, params);
 
 		logger.info(" Row updated Decision Made by admin");
 		return row;

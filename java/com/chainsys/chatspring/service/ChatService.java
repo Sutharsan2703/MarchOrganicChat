@@ -5,11 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chainsys.chatspring.dao.SearchDao;
 import com.chainsys.chatspring.daoimpl.CommuneDaoImpl;
 import com.chainsys.chatspring.daoimpl.LoginDaoImpl;
 import com.chainsys.chatspring.daoimpl.PersonalDaoImpl;
 import com.chainsys.chatspring.daoimpl.RegisterDaoImpl;
 import com.chainsys.chatspring.daoimpl.ReportDaoImpl;
+import com.chainsys.chatspring.daoimpl.SearchDaoImpl;
 import com.chainsys.chatspring.exceptions.EntryInvalidException;
 import com.chainsys.chatspring.exceptions.LoginInvalidException;
 import com.chainsys.chatspring.exceptions.MailExistsException;
@@ -53,6 +55,9 @@ public class ChatService {
 
 	@Autowired
 	CommuneDaoImpl communeDaoImpl;
+
+	@Autowired
+	SearchDaoImpl searchDaoImpl;
 
 	// Registration
 
@@ -245,6 +250,31 @@ public class ChatService {
 		Integer communeId = (Integer) session.getAttribute("communeId");
 
 		communeDaoImpl.textReceiveCommune(session, communeId);
+	}
+
+	// Searching messages by sender as attribute
+
+	public void searchBySender(String sender, HttpSession session) {
+		searchDaoImpl.searchBySender(sender, session);
+
+	}
+	// Searching Images messages by sender as attribute
+
+	public void searchImageBySender(String sender, HttpSession session) {
+		searchDaoImpl.searchImageBySender(sender, session);
+
+	}
+
+	// Search messages by content
+
+	public void searchByMessage(String message, HttpSession session) {
+		searchDaoImpl.searchByMessage(message, session);
+	}
+	
+	// Search messages by image content
+	
+	public void searchByImageMessage(String message, HttpSession session) {
+		searchDaoImpl.searchByImageMessage(message, session);
 	}
 
 }

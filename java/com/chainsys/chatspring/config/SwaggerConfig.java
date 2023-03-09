@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
 	@Bean
 	public Docket swaggerConfiguration() {
-		return  new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.any()).build();
-		 
+		return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.any()).build();
+
 	}
 }

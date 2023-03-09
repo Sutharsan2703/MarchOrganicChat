@@ -24,10 +24,10 @@ public class CommuneController {
 	@Autowired
 	Commune commune;
 
-	
-
 // message on commune
+
 	@PostMapping("/sendCommune")
+
 	public String sendCommune(@RequestParam("communeId") Integer communeId, @RequestParam("sender") String sender,
 			@RequestParam("message") String message, @RequestParam("image") MultipartFile image, HttpSession session)
 			throws IOException {
@@ -39,8 +39,9 @@ public class CommuneController {
 		// Not to be hard coded for security reasons - on q-gate
 
 		String fileName = image.getOriginalFilename();
-		try(FileInputStream input = new FileInputStream("\\Users\\suth3338\\eclipse-workspace\\final-project\\organicChat\\src\\main\\webapp\\Images\\ShareImages\\"+ fileName);){
-
+		try (FileInputStream input = new FileInputStream(
+				"\\Users\\suth3338\\eclipse-workspace\\final-project\\organicChat\\src\\main\\webapp\\Images\\ShareImages\\"
+						+ fileName);) {
 
 			byte[] doc = input.readAllBytes();
 
@@ -49,11 +50,13 @@ public class CommuneController {
 			chat.createMessage(commune);
 			return "chatPage";
 
-		} 
+		}
 	}
 
 //	Only text on commune
+
 	@PostMapping("/textCommune")
+
 	public String textCommune(@RequestParam("communeId") Integer communeId, @RequestParam("sender") String sender,
 			@RequestParam("message") String message, HttpSession session) {
 		commune.setCommuneId(communeId);
@@ -81,6 +84,7 @@ public class CommuneController {
 	}
 
 //Commune messages receiving  and updating the message status 
+
 	@PostMapping("/receiveCommune")
 	public String receiveCommune(@RequestParam("communeId") Integer communeId, HttpSession session) {
 		session.setAttribute("communeId", communeId);
@@ -90,6 +94,7 @@ public class CommuneController {
 	}
 
 //Commune messages receiving  and updating the  text message status 
+
 	@PostMapping("/textReceiveCommune")
 	public String textReceiveCommune(@RequestParam("communeId") Integer communeId, HttpSession session) {
 		session.setAttribute("communeId", communeId);
@@ -98,7 +103,7 @@ public class CommuneController {
 		return "commReceiveText";
 
 	}
-	
-	/* Commune controllers on Register  */
+
+	/* few Commune controllers on Register */
 
 }

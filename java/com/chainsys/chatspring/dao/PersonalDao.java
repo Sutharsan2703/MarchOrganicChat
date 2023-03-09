@@ -16,16 +16,16 @@ public interface PersonalDao {
 
 	public Integer sendImage(PersonalChat personal);
 
-	public List<PersonalChat> receive(HttpSession session) ;
+	public List<PersonalChat> receive(HttpSession session);
 
-	public List<PersonalChat> sentMessage(HttpSession session,String userName) ;
-	
+	public List<PersonalChat> sentMessage(HttpSession session, String userName);
+
 	public List<PersonalChat> sentImage(HttpSession session);
 
-	public boolean userExisting(String receiver) throws UserInvalidException;
+	public Boolean userExisting(String receiver) throws UserInvalidException;
 
 	public Boolean messageCheck(PersonalChat pc) throws InvalidMessageLengthException;
 
-	
-	public List<PersonalChat> receiveImage(HttpSession session,String userName);
+	public List<PersonalChat> receiveImage(HttpSession session, String userName);
+
 }

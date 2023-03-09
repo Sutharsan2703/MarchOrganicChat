@@ -24,8 +24,8 @@ public class RegisterDaoImpl implements RegisterDao {
 
 	Logger logger = LoggerFactory.getLogger(RegisterDaoImpl.class);
 
-	
-	
+//Registration 
+
 	public Integer registerUser(Register register, HttpSession session) {
 
 		String regUser = "insert into register (name,mailId,userId,userName,security,password,confirmPassword,logindate)values(?,?,seq_id.nextval,?,?,?,?,localtimestamp)";
@@ -37,7 +37,7 @@ public class RegisterDaoImpl implements RegisterDao {
 
 		String change = "update register set username=CONCAT(substr(mailid,1,4),userid) where mailId =?";
 		Object[] params1 = { register.getMailId() };
-		int rows = jdbcTemplate.update(change, params1);
+		Integer rows = jdbcTemplate.update(change, params1);
 
 		logger.info(" Row Updated in the UserName on Register");
 
@@ -52,6 +52,8 @@ public class RegisterDaoImpl implements RegisterDao {
 		return rows;
 	}
 
+//Validating whether the mail id already exists, for registration 	
+
 	public void mailIdExisting(String mailId) throws MailExistsException {
 
 		String query = "select mailId from register ";
@@ -62,11 +64,13 @@ public class RegisterDaoImpl implements RegisterDao {
 				throw new MailExistsException();
 
 			} else {
-				
+
 				logger.info("Continue");
 			}
 		}
 	}
+
+//Finding User Name, if user forgot	
 
 	public Boolean findName(String mailId, HttpSession session) {
 		String newun = "select username from register where mailId =?";
@@ -81,8 +85,9 @@ public class RegisterDaoImpl implements RegisterDao {
 
 		}
 
-
 	}
+
+//Forgot password 	
 
 	public Boolean forgotPassword(Register register, HttpSession session) {
 
@@ -90,28 +95,30 @@ public class RegisterDaoImpl implements RegisterDao {
 		String queryForObject = null;
 		try {
 			queryForObject = jdbcTemplate.queryForObject(forget, String.class, register.getMailId());
-				if ((register.getSecurity()).equals(queryForObject)) {
+			if ((register.getSecurity()).equals(queryForObject)) {
 				session.setAttribute("mail", register.getMailId());
 
 				return true;
 			} else {
 
 				return false;
-		}
+			}
 		} catch (EmptyResultDataAccessException e) {
 
 			return false;
 		}
 	}
 
+//Reset password	
+
 	public Boolean resetPassword(Register register) {
 
 		String forget = "update register set password=? , confirmPassword=? where mailId =?";
 
 		Object[] params1 = { register.getPassword(), register.getConfirmPassword(), register.getMailId() };
-		 jdbcTemplate.update(forget, params1);
+		jdbcTemplate.update(forget, params1);
 
-		logger.info( " Row Updated and Password changed ");
+		logger.info(" Row Updated and Password changed ");
 		return true;
 
 	}

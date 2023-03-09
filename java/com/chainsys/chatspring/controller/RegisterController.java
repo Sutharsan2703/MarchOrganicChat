@@ -99,13 +99,12 @@ public class RegisterController {
 
 		String mail = mailId.toLowerCase();
 		register.setMailId(mail);
-		if(chat.findName(mail, session).equals(true)) {
-		return "registerLogin";
-	}else {
-		return "home";
+		if (chat.findName(mail, session).equals(true)) {
+			return "registerLogin";
+		} else {
+			return "home";
 		}
 	}
-		
 
 // Get security from Database on forgot password	
 
@@ -125,6 +124,7 @@ public class RegisterController {
 		}
 		return "uName";
 	}
+
 //reset password	
 
 	@PostMapping("/resetPassword")
@@ -177,7 +177,7 @@ public class RegisterController {
 	public String logout(HttpSession session) {
 
 		session.invalidate();
-		
+
 		return "home";
 	}
 

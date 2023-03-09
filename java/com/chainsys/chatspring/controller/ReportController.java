@@ -27,6 +27,7 @@ public class ReportController {
 	Report report;
 
 	// User Create Report
+
 	@PostMapping("/createReport")
 
 	public String createReport(@RequestParam("reportUserName") String reportUserName,
@@ -47,6 +48,7 @@ public class ReportController {
 	// View Report Status
 
 	@GetMapping("/viewReportStatus")
+
 	public String viewReportStatus(HttpSession session) {
 
 		chat.reportStatusView(session);
@@ -54,7 +56,9 @@ public class ReportController {
 	}
 
 	// Administrator View report
+
 	@GetMapping("/checkReport")
+
 	public String check(HttpSession session) {
 
 		chat.check(session);
@@ -62,16 +66,20 @@ public class ReportController {
 	}
 
 	// Administrator Analyze report
+
 	@PostMapping("/analyzeReport")
+
 	public String analyzeReport(PersonalChat personalChat, HttpSession session) {
 
-		chat.allMessages(personalChat,session);
+		chat.allMessages(personalChat, session);
 
 		return "adminAnalyze";
 	}
 
 	// Warning or Suggestion to user
+
 	@PostMapping("/warnUser")
+
 	public String warnUser(@RequestParam("messageId") String messageId, HttpSession session) {
 
 		session.setAttribute("messageId", messageId);
@@ -79,7 +87,9 @@ public class ReportController {
 	}
 
 	// Updating Decision to Report
+
 	@PostMapping("/reportDec")
+
 	public String reportDec(@RequestParam("messageId") String messageId,
 			@RequestParam("reportUserName") String reportUserName, @RequestParam("reportStatus") String reportStatus,
 			HttpSession session) {

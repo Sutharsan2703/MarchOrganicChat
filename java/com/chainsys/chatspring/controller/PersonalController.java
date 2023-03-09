@@ -51,6 +51,7 @@ public class PersonalController {
 	// Sending Image (One To One communication)
 
 	@PostMapping("/sendImage")
+
 	public String sendImage(@RequestParam("sender") String sender, @RequestParam("receiver") String receiver,
 			@RequestParam("message") String message, @RequestParam("image") MultipartFile image, HttpSession session)
 			throws UserInvalidException, IOException {
@@ -63,9 +64,9 @@ public class PersonalController {
 		personalChat.setMessage(message);
 
 		String fileName = image.getOriginalFilename();
-		try(FileInputStream input = new FileInputStream("\\Users\\suth3338\\eclipse-workspace\\final-project\\organicChat\\src\\main\\webapp\\Images\\ShareImages\\"+ fileName);){
-
-		
+		try (FileInputStream input = new FileInputStream(
+				"\\Users\\suth3338\\eclipse-workspace\\final-project\\organicChat\\src\\main\\webapp\\Images\\ShareImages\\"
+						+ fileName);) {
 
 			byte[] doc = input.readAllBytes();
 
@@ -79,11 +80,12 @@ public class PersonalController {
 			} else {
 				return "chatPage";
 			}
-		} 
+		}
 
 	}
 
 	// receiving the messages and updating the message status
+
 	@GetMapping("/receive")
 	public String receive(HttpSession session) {
 
@@ -92,6 +94,7 @@ public class PersonalController {
 	}
 
 	// receiving the messages and updating the message status on Image (One to One)
+
 	@GetMapping("/receiveImage")
 	public String receiveImage(HttpSession session) {
 
@@ -108,6 +111,7 @@ public class PersonalController {
 
 		return "sentMessage";
 	}
+
 	// view the Image sent by user Logged
 
 	@GetMapping("/sentImage")
@@ -119,14 +123,18 @@ public class PersonalController {
 	}
 
 	// Reply UserName Suggestion
+
 	@PostMapping("/replyController")
+
 	public String response(@RequestParam("senderId") String senderId, HttpSession session) {
 		session.setAttribute("senderId", senderId);
 		return "replyOnReceived";
 	}
 
 	// Reply Image Suggestion
+
 	@PostMapping("/replyImageController")
+
 	public String responseImage(@RequestParam("senderId") String senderId, HttpSession session) {
 		session.setAttribute("senderId", senderId);
 		return "replyOnImage";
