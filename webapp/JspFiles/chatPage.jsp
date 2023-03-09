@@ -21,6 +21,7 @@ String name = session.getAttribute("name").toString().toUpperCase();
 HttpSession sessionlist = request.getSession();
 
 List<PersonalChat> userList = (List<PersonalChat>) sessionlist.getAttribute("userMessaged");
+List<PersonalChat> userImage = (List<PersonalChat>) sessionlist.getAttribute("userImageMessaged");
 %>
 
 <div class="colo1">
@@ -30,12 +31,51 @@ List<PersonalChat> userList = (List<PersonalChat>) sessionlist.getAttribute("use
 	<div>
 		<button class="openbtn" onclick="myFunction()">&#9776;
 			Profile</button>
+			
+		
 
-		<button class="openbtn" onsubmit="/replyController">
-			<h5>
+		<button class="openbtn" >
+			<h5><form action="/searchBySender" method="post" >
 				Frequently Contacted: <select id="sender" name="sender">
 
 
+					<%
+					for (PersonalChat personal : userList) {
+					%>
+					
+					<option value="<%=personal.getSender()%>"><button><%=personal.getSender()%></button>
+					</option>
+					<%
+					}
+					%>
+					
+					<%
+					for (PersonalChat personal1 : userImage) {
+					%>
+					<option value="<%=personal1.getSender()%>"><button><%=personal1.getSender()%></button>
+					</option>
+					<%
+					}
+					%>
+					
+				</select>
+			</h5>Text:
+			<input type="submit">
+</form>
+		</button>
+		<button class="openbtn" >
+			<h5><form action="/searchImageBySender" method="post" >
+				 <select id="sender" name="sender">
+
+	
+					<%
+					for (PersonalChat personal1 : userImage) {
+					%>
+					<option value="<%=personal1.getSender()%>"><button><%=personal1.getSender()%></button>
+					</option>
+					<%
+					}
+					%>
 					<%
 					for (PersonalChat personal : userList) {
 					%>
@@ -45,9 +85,18 @@ List<PersonalChat> userList = (List<PersonalChat>) sessionlist.getAttribute("use
 					}
 					%>
 				</select>
-			</h5>
-
+			</h5>Image:
+			<input type="submit">
+</form>
 		</button>
+		<button class="openbtn" >
+			<form action="/searchByMessage" method="post" >
+				 <input type="text" name="message" id="message" placeholder="search...any ?">
+			
+			<input type="submit">
+</form>
+		</button>
+		
 
 
 		<span class="right">

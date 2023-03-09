@@ -35,18 +35,16 @@ String communeId = session.getAttribute("communeId").toString();
 		&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; :<input type="text" name="sender"
 			placeholder="sender (ex: userName ) "  value="<%=uName%>"size="30px" readonly="readonly"
 			required> <br> <br> 
-	
+	<span class="drac">
 			Commune-Key &nbsp; &nbsp; &nbsp;
 		&nbsp;&nbsp;:<input type="number" name="communeId" value="<%=communeId %>"
-			placeholder="enter Commune-Key to share info" size="30px" required>
+			placeholder="enter Commune-Key to share info" size="30px" required></span>
 	<br> <br>
 	
-	
-			
-			
+		<span class="drac">
 		  Message &nbsp; &nbsp;&nbsp; &nbsp;:<textarea  type="text" name="message" 
 			placeholder="Type the message"  placeholder="Type the Message..." required="required"></textarea>
-			
+			</span>
 						<br> <br>
 			
 			

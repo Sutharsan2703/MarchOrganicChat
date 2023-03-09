@@ -36,17 +36,58 @@
 		</p>
 		<label class="left">Happy connecting..... </label><br> <br>
 	</div>
+<%
+HttpSession sessionlist = request.getSession();
 
+List<PersonalChat> userList = (List<PersonalChat>) sessionlist.getAttribute("userMessaged");
+List<PersonalChat> userImage = (List<PersonalChat>) sessionlist.getAttribute("userImageMessaged");
+%>
 
 	<%
-	HttpSession sessionlist = request.getSession();
+	//HttpSession sessionlist = request.getSession();
 
 	List<PersonalChat> pd = (List<PersonalChat>) sessionlist.getAttribute("receivedMessage");
 	%>
 
+<div class ="center">
+<button>
+			<form action="/searchByMessage" method="post" >
+				 <input type="text" name="message" id="message" placeholder="search...any ?">
+			
+			<input type="submit">
+</form>
+		</button>
+		</div>
+
+<button class="openbtn" >
+<form action="/searchBySender" method="post" >
+				Frequently Contacted: <select id="sender" name="sender">
 
 
-
+					<%
+					for (PersonalChat personal : userList) {
+					%>
+					
+					<option value="<%=personal.getSender()%>"><button><%=personal.getSender()%></button>
+					</option>
+					<%
+					}
+					%>
+					
+					<%
+					for (PersonalChat personal1 : userImage) {
+					%>
+					<option value="<%=personal1.getSender()%>"><button><%=personal1.getSender()%></button>
+					</option>
+					<%
+					}
+					%>
+					
+				</select>
+			</h5>Text:
+			<input type="submit">
+</form>
+</button>
 
 
 	<table class="center1">
