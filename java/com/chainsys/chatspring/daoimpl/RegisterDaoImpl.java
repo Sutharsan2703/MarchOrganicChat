@@ -6,21 +6,20 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import com.chainsys.chatspring.dao.RegisterDao;
 import com.chainsys.chatspring.exceptions.MailExistsException;
 import com.chainsys.chatspring.mapper.DisplayMapper;
 import com.chainsys.chatspring.mapper.RegisterMapper;
 import com.chainsys.chatspring.model.Register;
+import com.chainsys.chatspring.util.ConnectionUtil;
 
-@Repository
+
 public class RegisterDaoImpl implements RegisterDao {
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	
+	JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
+
 
 	Logger logger = LoggerFactory.getLogger(RegisterDaoImpl.class);
 
@@ -28,14 +27,14 @@ public class RegisterDaoImpl implements RegisterDao {
 
 	public Integer registerUser(Register register, HttpSession session) {
 
-		String regUser = "insert into register (name,mailId,userId,userName,security,password,confirmPassword,logindate)values(?,?,seq_id.nextval,?,?,?,?,localtimestamp)";
+		String registerUser = "insert into register (name,mailId,userId,userName,security,password,confirmPassword,loginDate)values(?,?,seq_id.nextval,?,?,?,?,localtimestamp)";
 		Object[] params = { register.getName(), register.getMailId(), register.getUserName(), register.getSecurity(),
 				register.getPassword(), register.getConfirmPassword() };
-		jdbcTemplate.update(regUser, params);
+		jdbcTemplate.update(registerUser, params);
 
 		logger.info(" Row Inserted into Register");
 
-		String change = "update register set username=CONCAT(substr(mailid,1,4),userid) where mailId =?";
+		String change = "update register set userName=CONCAT(substr(mailId,1,4),userId) where mailId =?";
 		Object[] params1 = { register.getMailId() };
 		Integer rows = jdbcTemplate.update(change, params1);
 
@@ -57,8 +56,8 @@ public class RegisterDaoImpl implements RegisterDao {
 	public void mailIdExisting(String mailId) throws MailExistsException {
 
 		String query = "select mailId from register ";
-		List<Register> listOfReg = jdbcTemplate.query(query, new RegisterMapper());
-		for (Register register : listOfReg) {
+		List<Register> listOfRegister = jdbcTemplate.query(query, new RegisterMapper());
+		for (Register register : listOfRegister) {
 			String regMailId = register.getMailId();
 			if (regMailId.equals(mailId)) {
 				throw new MailExistsException();
@@ -73,10 +72,10 @@ public class RegisterDaoImpl implements RegisterDao {
 //Finding User Name, if user forgot	
 
 	public Boolean findName(String mailId, HttpSession session) {
-		String newun = "select username from register where mailId =?";
+		String findName = "select userName from register where mailId =?";
 		String queryForObject = null;
 		try {
-			queryForObject = jdbcTemplate.queryForObject(newun, String.class, mailId);
+			queryForObject = jdbcTemplate.queryForObject(findName, String.class, mailId);
 			session.setAttribute("userName", queryForObject);
 
 			return true;
@@ -113,10 +112,10 @@ public class RegisterDaoImpl implements RegisterDao {
 
 	public Boolean resetPassword(Register register) {
 
-		String forget = "update register set password=? , confirmPassword=? where mailId =?";
+		String reset = "update register set password=? , confirmPassword=? where mailId =?";
 
 		Object[] params1 = { register.getPassword(), register.getConfirmPassword(), register.getMailId() };
-		jdbcTemplate.update(forget, params1);
+		jdbcTemplate.update(reset, params1);
 
 		logger.info(" Row Updated and Password changed ");
 		return true;

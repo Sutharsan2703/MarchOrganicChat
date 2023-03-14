@@ -12,17 +12,17 @@ public class MessageViewMapper implements RowMapper<PersonalChat> {
 	@Override
 	public PersonalChat mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-		PersonalChat pChat = new PersonalChat();
+		PersonalChat personalChat = new PersonalChat();
 
-		pChat.setSender(rs.getString("sender"));
-		pChat.setReceiver(rs.getString("receiver"));
-		pChat.setMessageTime(rs.getString("messageTime"));
-		pChat.setReqStatus(rs.getString("reqStatus"));
+		personalChat.setSender(rs.getString("sender"));
+		personalChat.setReceiver(rs.getString("receiver"));
+		personalChat.setMessageTime(rs.getString("messageTime"));
+		personalChat.setReqStatus(rs.getString("reqStatus"));
 
-		pChat.setMessage(rs.getString("message"));
-		pChat.setMessageId(rs.getInt("messageId"));
+		personalChat.setMessage(rs.getString("message"));
+		personalChat.setMessageId(rs.getInt("messageId"));
 
-		return pChat;
+		return personalChat;
 	}
 
 }

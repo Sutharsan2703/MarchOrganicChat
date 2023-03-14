@@ -1,8 +1,6 @@
 package com.chainsys.chatspring.model;
 
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class Register {
 
 	// POJO - Plain old Java Object

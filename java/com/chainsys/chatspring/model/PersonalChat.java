@@ -2,9 +2,7 @@ package com.chainsys.chatspring.model;
 
 import java.util.Arrays;
 
-import org.springframework.stereotype.Repository;
 
-@Repository
 
 //Plain Old Java Object - pojo
 public class PersonalChat {

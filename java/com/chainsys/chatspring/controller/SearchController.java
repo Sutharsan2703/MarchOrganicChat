@@ -1,8 +1,10 @@
 package com.chainsys.chatspring.controller;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +14,11 @@ import com.chainsys.chatspring.service.ChatService;
 @Controller
 public class SearchController {
 
-	@Autowired
-	ChatService chat;
+	
+	ChatService chat = new ChatService();
 
+	String receiveTheMessage= "receiveMessage";
+	
 	// Search by sender - text
 
 	@PostMapping("/searchBySender")
@@ -23,7 +27,7 @@ public class SearchController {
 
 		chat.searchBySender(sender, session);
 
-		return "receiveMessage";
+		return receiveTheMessage;
 	}
 
 	// Search by sender - images
@@ -45,7 +49,7 @@ public class SearchController {
 
 		chat.searchByMessage(message, session);
 
-		return "receiveMessage";
+		return receiveTheMessage;
 	}
 	
 	// Search by message Image content
@@ -57,6 +61,17 @@ public class SearchController {
 		chat.searchByImageMessage(message, session);
 		
 		return "receiveImage";
+	}
+	
+	// Search by message -date
+	
+	@PostMapping("/searchByDate")
+	
+	public String searchBydate(@RequestParam("from") Date from,@RequestParam("to") Date to, HttpSession session){
+		
+		chat.searchByDate(from,to, session);
+		
+		return receiveTheMessage ;
 	}
 
 }

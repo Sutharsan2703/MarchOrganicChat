@@ -1,12 +1,8 @@
 package com.chainsys.chatspring.model;
 
-import java.sql.Blob;
 import java.sql.Date;
 import java.util.Arrays;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 
 public class Commune {
 	// Plain Old Java Object

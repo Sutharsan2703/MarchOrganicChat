@@ -2,9 +2,7 @@ package com.chainsys.chatspring.model;
 
 import java.sql.Date;
 
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class Report {
 
 	private Integer reportId;

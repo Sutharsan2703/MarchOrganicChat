@@ -18,11 +18,9 @@ import com.chainsys.chatspring.service.ChatService;
 @Controller
 public class CommuneController {
 
-	@Autowired
-	ChatService chat;
+	ChatService chat = new ChatService();
 
-	@Autowired
-	Commune commune;
+	Commune commune = new Commune();
 
 // message on commune
 
@@ -79,7 +77,7 @@ public class CommuneController {
 
 	@GetMapping("/membersList")
 	public String communeMembersList(HttpSession session) {
-		chat.membListCommune(session);
+		chat.memberListCommune(session);
 		return "communeMembers";
 	}
 

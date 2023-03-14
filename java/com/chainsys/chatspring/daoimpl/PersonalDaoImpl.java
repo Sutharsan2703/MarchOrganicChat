@@ -6,10 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import com.chainsys.chatspring.dao.PersonalDao;
 import com.chainsys.chatspring.exceptions.InvalidMessageLengthException;
 import com.chainsys.chatspring.exceptions.UserInvalidException;
@@ -21,13 +18,15 @@ import com.chainsys.chatspring.mapper.SentMapper;
 import com.chainsys.chatspring.mapper.UserMapper;
 import com.chainsys.chatspring.model.PersonalChat;
 import com.chainsys.chatspring.model.Register;
+import com.chainsys.chatspring.util.ConnectionUtil;
 
-@Repository
+
 
 public class PersonalDaoImpl implements PersonalDao {
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	
+	JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
 
+	
 	Logger logger = LoggerFactory.getLogger(PersonalDaoImpl.class);
 
 //One to one text messages
@@ -47,9 +46,9 @@ public class PersonalDaoImpl implements PersonalDao {
 //One to one image sharing
 
 	public Integer sendImage(PersonalChat personal) {
-		String write = "insert into personalFiles (sender,receiver,messageTime,reqStatus,message,messageId,docs)values(?,?,localtimestamp,'Sending message',?,seq_id10.nextval,?)";
+		String writeImage = "insert into personalFiles (sender,receiver,messageTime,reqStatus,message,messageId,docs)values(?,?,localtimestamp,'Sending message',?,seq_id10.nextval,?)";
 		Object[] params = { personal.getSender(), personal.getReceiver(), personal.getMessage(), personal.getDocs() };
-		Integer rows = jdbcTemplate.update(write, params);
+		Integer rows = jdbcTemplate.update(writeImage, params);
 
 		logger.info(" Row Inserted in personalFiles message sent");
 		return rows;
@@ -78,8 +77,8 @@ public class PersonalDaoImpl implements PersonalDao {
 
 	public List<PersonalChat> sentMessage(/* PersonalChat personal, */HttpSession session, String userName) {
 
-		String receive = "select receiver,reqStatus,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,messageId,message from personalChat where sender =? order by messageId desc ";
-		List<PersonalChat> sentMessage = jdbcTemplate.query(receive, new SentMapper(), userName);
+		String viewSent = "select receiver,reqStatus,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,messageId,message from personalChat where sender =? order by messageId desc ";
+		List<PersonalChat> sentMessage = jdbcTemplate.query(viewSent, new SentMapper(), userName);
 
 		session.setAttribute("sentMessage", sentMessage);
 
@@ -91,18 +90,18 @@ public class PersonalDaoImpl implements PersonalDao {
 	public List<PersonalChat> sentImage(HttpSession session) {
 		String userName = (String) session.getAttribute("userName");
 		String receive = "select receiver,reqStatus,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,messageId,message,docs from personalFiles where sender =? order by messageId desc ";
-		List<PersonalChat> sentImageMessage = jdbcTemplate.query(receive, new SentImageMapper(), userName);
+		List<PersonalChat> sentImage= jdbcTemplate.query(receive, new SentImageMapper(), userName);
 
-		session.setAttribute("sentImageMessage", sentImageMessage);
+		session.setAttribute("sentImageMessage", sentImage);
 
-		return sentImageMessage;
+		return sentImage;
 	}
 
 //Validate whether the user exists	
 
 	public Boolean userExisting(String receiver) throws UserInvalidException {
 
-		String query = "select userName from register where username=? ";
+		String query = "select userName from register where userName=? ";
 		List<Register> listOfUsers = jdbcTemplate.query(query, new UserMapper(), receiver);
 
 		for (Register register : listOfUsers) {
@@ -138,7 +137,8 @@ public class PersonalDaoImpl implements PersonalDao {
 //Administrator to view all messages of a particular user if any Report is raised  	
 
 	public List<PersonalChat> allMessages(PersonalChat personalChat, HttpSession session) {
-		String statusUpdate = "update report set reportstatus='Processing request....' where reportUserName=?";
+		
+		String statusUpdate = "update report set reportStatus='Processing request....' where reportUserName=?";
 		Object[] params = { personalChat.getSender() };
 		jdbcTemplate.update(statusUpdate, params);
 

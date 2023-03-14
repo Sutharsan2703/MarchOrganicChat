@@ -19,11 +19,11 @@ import com.chainsys.chatspring.service.ChatService;
 @Controller
 public class PersonalController {
 
-	@Autowired
-	ChatService chat;
+	
+	ChatService chat = new ChatService();
 
-	@Autowired
-	PersonalChat personalChat;
+	
+	PersonalChat personalChat = new PersonalChat();
 
 	// Sending Message (One To One communication)
 

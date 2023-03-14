@@ -17,14 +17,14 @@ import com.chainsys.chatspring.service.ChatService;
 
 public class ReportController {
 
-	@Autowired
-	ChatService chat;
+	
+	ChatService chat = new ChatService();
 
-	@Autowired
-	PersonalChat personalChat;
+	
+	PersonalChat personalChat =new PersonalChat();
 
-	@Autowired
-	Report report;
+	
+	Report report = new Report();
 
 	// User Create Report
 
@@ -88,13 +88,13 @@ public class ReportController {
 
 	// Updating Decision to Report
 
-	@PostMapping("/reportDec")
+	@PostMapping("/reportDecision")
 
-	public String reportDec(@RequestParam("messageId") String messageId,
+	public String reportDecision(@RequestParam("messageId") String messageId,
 			@RequestParam("reportUserName") String reportUserName, @RequestParam("reportStatus") String reportStatus,
 			HttpSession session) {
 
-		chat.reportDec(messageId, reportUserName, reportStatus);
+		chat.reportDecision(messageId, reportUserName, reportStatus);
 		return "admin";
 	}
 

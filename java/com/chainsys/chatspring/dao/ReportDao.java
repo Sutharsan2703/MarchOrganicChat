@@ -16,4 +16,6 @@ public interface ReportDao {
 
 	public List<Report> reportStatusView(HttpSession session);
 
+	public Integer reportDecision(String messageId, String reportUserName, String reportStatus);
+
 }

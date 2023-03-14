@@ -15,13 +15,13 @@ public class PersonalMapper implements RowMapper<PersonalChat> {
 	@Override
 	public PersonalChat mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-		PersonalChat pChat = new PersonalChat();
-		pChat.setSender(rs.getString("sender"));
-		pChat.setMessage(rs.getString("message"));
-		pChat.setMessageTime(rs.getString("messageTime"));
-		pChat.setMessageId(rs.getInt("messageId"));
+		PersonalChat personalChat  = new PersonalChat();
+		personalChat.setSender(rs.getString("sender"));
+		personalChat.setMessage(rs.getString("message"));
+		personalChat.setMessageTime(rs.getString("messageTime"));
+		personalChat.setMessageId(rs.getInt("messageId"));
 
-		return pChat;
+		return personalChat;
 	}
 
 }

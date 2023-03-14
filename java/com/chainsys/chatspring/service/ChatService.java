@@ -1,5 +1,8 @@
 package com.chainsys.chatspring.service;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +29,27 @@ import com.chainsys.chatspring.model.Report;
 @Service
 public class ChatService {
 
-	@Autowired
-	RegisterDaoImpl registerDaoImpl;
+	RegisterDaoImpl registerDaoImpl = new RegisterDaoImpl();
 
-	@Autowired
-	Register register;
+	Register register = new Register();
 
-	@Autowired
-	Login login;
+	Login login = new Login();
 
-	@Autowired
-	LoginDaoImpl loginDaoImpl;
+	LoginDaoImpl loginDaoImpl = new LoginDaoImpl();
 
-	@Autowired
-	PersonalChat personalChat;
+	PersonalChat personalChat = new PersonalChat();
 
-	@Autowired
-	PersonalDaoImpl personalDaoImpl;
+	PersonalDaoImpl personalDaoImpl = new PersonalDaoImpl();
 
-	@Autowired
-	Report report;
+	Report report = new Report();
 
-	@Autowired
-	ReportDaoImpl reportDaoImpl;
+	ReportDaoImpl reportDaoImpl = new ReportDaoImpl();
 
-	@Autowired
-	Commune commune;
+	Commune commune = new Commune();
 
-	@Autowired
-	CommuneDaoImpl communeDaoImpl;
+	CommuneDaoImpl communeDaoImpl = new CommuneDaoImpl();
 
-	@Autowired
-	SearchDaoImpl searchDaoImpl;
+	SearchDaoImpl searchDaoImpl = new SearchDaoImpl();
 
 	// Registration
 
@@ -139,8 +131,8 @@ public class ChatService {
 
 	// Administrator making Decision on report and update status
 
-	public void reportDec(String messageId, String reportUserName, String reportStatus) {
-		reportDaoImpl.reportDec(messageId, reportUserName, reportStatus);
+	public void reportDecision(String messageId, String reportUserName, String reportStatus) {
+		reportDaoImpl.reportDecision(messageId, reportUserName, reportStatus);
 	}
 
 	// Check user Existing While messaging (One to One) communication
@@ -231,10 +223,10 @@ public class ChatService {
 
 	// Member list on that particular Commune
 
-	public void membListCommune(HttpSession session) {
+	public void memberListCommune(HttpSession session) {
 		Integer communeId = (Integer) session.getAttribute("communeId");
 
-		communeDaoImpl.membListCommune(session, communeId);
+		communeDaoImpl.memberListCommune(session, communeId);
 	}
 
 	// Receive image included with texts
@@ -270,11 +262,18 @@ public class ChatService {
 	public void searchByMessage(String message, HttpSession session) {
 		searchDaoImpl.searchByMessage(message, session);
 	}
-	
+
 	// Search messages by image content
-	
+
 	public void searchByImageMessage(String message, HttpSession session) {
 		searchDaoImpl.searchByImageMessage(message, session);
+	}
+
+	public void searchByDate(Date from, Date to, HttpSession session) {
+		String receiver = session.getAttribute("userName1").toString();
+
+		searchDaoImpl.searchByDate(from, to, session, receiver);
+
 	}
 
 }

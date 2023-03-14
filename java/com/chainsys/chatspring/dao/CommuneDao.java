@@ -25,6 +25,6 @@ public interface CommuneDao {
 
 	public Integer textMessage(Commune commune);
 
-	public List<Commune> membListCommune(HttpSession session, Integer communeId);
+	public List<Commune> memberListCommune(HttpSession session, Integer communeId);
 
 }

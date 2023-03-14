@@ -6,23 +6,21 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import com.chainsys.chatspring.dao.LoginDao;
 import com.chainsys.chatspring.exceptions.LoginInvalidException;
 import com.chainsys.chatspring.mapper.LoginMapper;
 import com.chainsys.chatspring.mapper.UserListMapper;
-import com.chainsys.chatspring.mapper.UserMapper;
 import com.chainsys.chatspring.mapper.UserMessagedMapper;
 import com.chainsys.chatspring.model.Login;
 import com.chainsys.chatspring.model.PersonalChat;
 import com.chainsys.chatspring.model.Register;
+import com.chainsys.chatspring.util.ConnectionUtil;
 
-@Repository
+
 public class LoginDaoImpl implements LoginDao {
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	
+	JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
 
 	Logger logger = LoggerFactory.getLogger(LoginDaoImpl.class);
 
@@ -46,19 +44,19 @@ public class LoginDaoImpl implements LoginDao {
 				session.setAttribute("userName1", userName);
 				session.setAttribute("name", name);
 
-				String uList = "select userName,mailId from register order by mailId asc ";
-				List<Register> listOfUsers = jdbcTemplate.query(uList, new UserListMapper());
+				String userList = "select userName,mailId from register order by mailId asc ";
+				List<Register> listOfUsers = jdbcTemplate.query(userList, new UserListMapper());
 
 				session.setAttribute("userList", listOfUsers);
 
-				String messageFrom = "select distinct sender,reqstatus from personalChat where receiver =?   ";
+				String messageFrom = "select distinct sender,reqStatus from personalChat where receiver =?   ";
 				List<PersonalChat> listOfMessagedUsers = jdbcTemplate.query(messageFrom, new UserMessagedMapper(),
 						userName);
 
 				session.setAttribute("userMessaged", listOfMessagedUsers);
 				
-				String imgFrom = "select distinct sender,reqstatus from personalfiles where receiver =?   ";
-				List<PersonalChat> listOfImgUsers = jdbcTemplate.query(imgFrom, new UserMessagedMapper(),
+				String imageFrom = "select distinct sender,reqStatus from personalFiles where receiver =?   ";
+				List<PersonalChat> listOfImgUsers = jdbcTemplate.query(imageFrom, new UserMessagedMapper(),
 						userName);
 				
 				session.setAttribute("userImageMessaged", listOfImgUsers);

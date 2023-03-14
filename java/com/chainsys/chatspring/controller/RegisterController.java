@@ -27,23 +27,23 @@ import com.chainsys.chatspring.validate.Validation;
 @Controller
 public class RegisterController {
 
-	@Autowired
-	ChatService chat;
+	
+	ChatService chat = new ChatService();
 
-	@Autowired
-	Register register;
+	
+	Register register = new Register();
 
-	@Autowired
-	Login login;
+	
+	Login login = new Login();
 
-	@Autowired
-	PersonalChat personalChat;
+	
+	PersonalChat personalChat = new PersonalChat();
 
-	@Autowired
-	Report report;
+	
+	Report report = new Report();
 
-	@Autowired
-	Commune commune;
+	
+	Commune commune = new Commune();
 
 //Home page	
 

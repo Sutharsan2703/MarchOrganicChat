@@ -1,35 +1,37 @@
 package com.chainsys.chatspring.daoimpl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import com.chainsys.chatspring.dao.SearchDao;
 import com.chainsys.chatspring.mapper.ReceiveImageMapper;
 import com.chainsys.chatspring.mapper.ReceiveMapper;
 import com.chainsys.chatspring.model.PersonalChat;
+import com.chainsys.chatspring.util.ConnectionUtil;
 
-@Repository
+
 
 public class SearchDaoImpl implements SearchDao {
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	
+	JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
+
 
 	Logger logger = LoggerFactory.getLogger(SearchDaoImpl.class);
 
+	String receivedMessage="receivedMessage";
+	
 //Search by sender on personal chat
 
 	public List<PersonalChat> searchBySender(String sender, HttpSession session) {
 		String receiver = session.getAttribute("userName").toString();
-		String searchSend = "select sender,receiver,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,messageId,message from personalChat where sender=? and receiver =?";
+		String searchBySender = "select sender,receiver,messageTime,messageId,message from personalChat where sender=? and receiver =?";
 
-		List<PersonalChat> searchSender = jdbcTemplate.query(searchSend, new ReceiveMapper(), sender, receiver);
+		List<PersonalChat> searchSender = jdbcTemplate.query(searchBySender, new ReceiveMapper(), sender, receiver);
 		logger.info("Search by sender's name");
 
 		session.setAttribute("receivedMessage", searchSender);
@@ -41,9 +43,9 @@ public class SearchDaoImpl implements SearchDao {
 
 	public List<PersonalChat> searchImageBySender(String sender, HttpSession session) {
 		String receiver = session.getAttribute("userName").toString();
-		String searchImageSend = "select sender,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,reqStatus,messageId,message,docs from personalFiles where sender=? and receiver =?";
+		String searchByImageSender = "select sender,messageTime,reqStatus,messageId,message,docs from personalFiles where sender=? and receiver =?";
 
-		List<PersonalChat> searchImageSender = jdbcTemplate.query(searchImageSend, new ReceiveImageMapper(), sender,
+		List<PersonalChat> searchImageSender = jdbcTemplate.query(searchByImageSender, new ReceiveImageMapper(), sender,
 				receiver);
 		logger.info("Search by sender's name");
 
@@ -56,12 +58,12 @@ public class SearchDaoImpl implements SearchDao {
 
 	public List<PersonalChat> searchByMessage(String message, HttpSession session) {
 		String receiver = session.getAttribute("userName1").toString();
-		String searchByMessage = "select sender,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,messageId,message from personalChat where receiver =? and message like ? ";
+		String searchByMessage = "select sender,messageTime,messageId,message from personalChat where receiver =? and message like ? ";
 
 		List<PersonalChat> searchMessage = jdbcTemplate.query(searchByMessage, new ReceiveMapper(), receiver, "%"+message + "%");
 		logger.info("Search by Message");
 
-		session.setAttribute("receivedMessage", searchMessage);
+		session.setAttribute(receivedMessage, searchMessage);
 
 		return searchMessage;
 	}
@@ -72,7 +74,7 @@ public class SearchDaoImpl implements SearchDao {
 	public List<PersonalChat> searchByImageMessage(String message, HttpSession session) {
 		String receiver = session.getAttribute("userName1").toString();
 
-		String searchByImageMessage = "select sender,to_char(messagetime, 'dd-mm-yyyy hh24:mi:ss')messageTime,reqStatus,messageId,message,docs from personalFiles where receiver =? and message like ? ";
+		String searchByImageMessage = "select sender,messageTime,reqStatus,messageId,message,docs from personalFiles where receiver =? and message like ? ";
 		
 		List<PersonalChat> searchImageMessage = jdbcTemplate.query(searchByImageMessage, new ReceiveImageMapper(), receiver, "%"+message + "%");
 		logger.info("Search by Image Message");
@@ -81,5 +83,21 @@ public class SearchDaoImpl implements SearchDao {
 		
 		return searchImageMessage;
 	}
+
+	public List<PersonalChat> searchByDate(Date from, Date to,HttpSession session, String receiver) {
+
+	
+		String searchByDate = "select receiver,sender,messageTime,messageId,message from personalChat where receiver =? and messageTime  between ? and ? ";
+		
+		List<PersonalChat> searchDateMessage = jdbcTemplate.query(searchByDate, new ReceiveMapper(), receiver,from,to);
+		logger.info("Search by Date Message");
+		
+		session.setAttribute(receivedMessage, searchDateMessage);
+		
+		return searchDateMessage;
+		
+			
+	}
+
 
 }
