@@ -114,7 +114,7 @@
 				<div class="card-text">
 					<h3>Final Decision</h3>
 					<p class="card-pragraph">
-					<form action=/reportDec method="post" >
+					<form action="/reportDecision" method="post" >
 						Message-Key<br><input type="number" name="messageId" id="messageId" size="50px"
 							placeholder="Message-Key , which decision was made" required="required"> <br>
 						Report  On<br><input type="text" name="reportUserName" id="reportUsername" size="30px"

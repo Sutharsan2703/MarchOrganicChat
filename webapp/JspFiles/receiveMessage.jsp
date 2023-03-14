@@ -52,7 +52,25 @@ List<PersonalChat> userImage = (List<PersonalChat>) sessionlist.getAttribute("us
 <div class ="center">
 <button>
 			<form action="/searchByMessage" method="post" >
-				 <input type="text" name="message" id="message" placeholder="search...any ?">
+				 <input type="text" list = "messages"name="message" id="message" placeholder="search...any ?">
+			
+			<datalist id="messages"><%
+					for (PersonalChat personal : userList) {
+					%>
+					
+					<option value="<%=personal.getMessage()%>">
+					</option>
+					<%
+					}
+					%></datalist>
+			<input type="submit">
+</form>
+		</button>
+<button>
+			<form action="/searchByDate" method="post" >
+				 <input type="date"  id="from" name="from">
+				 <input type="date"  id="to" name="to">
+			
 			
 			<input type="submit">
 </form>
