@@ -1,26 +1,35 @@
 # sutharsan_project_organichat
 
 
+Getting started
 
-## Getting started
 
 Title:
-Organic Chat 
- (Within Organization) 
+# Organic Chat   (Chat within Organization)
 
-Description:
-Organic chatting is chatting that behaves and interacts between two or more objects(Persons) in a healthy way that doesn’t affect any individuals and to follow the guidelines of the organization.
+Vision :  To provide a professional communication platform.
 
-The user must be a part of the Organization to make use of the service, the mail id of the user validates the process and allows registration.
+Project description :
 
-After registering to the service the user has the option to choose the type of conversation they can proceed with. Conversation made in person must provide the comfortness of the receiver , so the receiver has the option to reject the unwanted and unnecessary messages. Here the messages are based on the message Id that to be auto generated. 
+- Organic chat is a chat that behaves and interacts between two or more objects(Persons) in a professional way that doesn’t affect any individuals and to follow the guidelines of the organization.  
 
-In the Communal chat, one of the users who creates the commune , the user has to provide name and password to the commune.The commune Id has been auto generated. The members of the group to be added by the user, who creates the commune .
 
-The admin is the one in the organization who acts as the user in charge, when the complaint is raised by any of the users who faced such a worse situation.
+- The user must be a part of the Organization to make use of the service, the user's domain name behind their mail-Id been validate this during registration.
 
-The report raised with the message id or communal id have to be submitted to the admin. The admin invokes the message or commune to investigate the event and make recommendations to the user who raised the report. Then the final decision will be made on the report and updated.  This report decision should ensure that the communication is held in an Organic manner.
 
+- After registering to the service the user has the selection to decide the type of chat they can proceed with. 
+
+
+- Personal chat is sorted as sending text and sharing images with the other users in one to one.
+
+
+- In the Communal chat, one of the users who develop the commune , the user has to provide name and password to the commune. The commune Key will be auto generated. The members of the Commune to be added by the user who creates the commune by sharing the commune Key and password individually to the user.
+
+
+- The admin is the one in the organization who acts as the user in charge, when the complaint or report is raised by any of the users as issues .
+
+
+- The report raised with the message Key or communal Key have to be submitted to the admin. The admin invokes the message or commune to investigate the event and make recommendations to the user who raised the report. Then the final decision will be made on the report and updated. This report decision should ensure that the Interaction is held in an Professional manner.
 
 
 
@@ -28,30 +37,29 @@ The report raised with the message id or communal id have to be submitted to the
 Modules:
 
 Admin 
--Supervises the messages , if necessary (Right to make necessity Actions)
+- Supervises the messages , if necessary (Right to make necessity Actions)
 
 Personal chat
--Sender
--Receiver
+- Sender
+- Receiver
 
 Commune Chat
 - Space Creator
-- Space Members
-- Space messenger
-- Space Audience
+- Message sender
+- Message
+- Space Audience 
 
 
 DataBase:
 
-Registration
-PersonalChat
-Sender
-Receiver
-CommunalChat
-Message 
-Report
-Admin
-
+ - Register		- > Registration
+ - PersonalChat	- > Text communication (One to One)
+ - PersonalFiles	- > Sharing images (One to One)
+ - Commune		- > Creation of Commune
+ - CommuneMembers	- > Joining members to the Commune
+ - Message		- > Image sharing to the Commune
+ - TextMessage	- > Text messages to the Commune
+ - Report 		- > Creation of report by user & verified by Admin
 
 
 
@@ -61,53 +69,62 @@ Features and Workflow:
 	Register():
 
 Get Mail 
-Validate( Mail format @ domain .com)
-Generate Chat Id for User (Auto generate)
-Generate Username 
-Generate as first five characters of mail id and chat user id
+- Validate( Mail format @ domain.com)
+- Generate User Id for User (Auto generate)
+- Generate UserName -> Generated as first four characters of mail id and chat user name
 
-Validate Register
+To Validate Register  
 
-Set Security Questions From Drop down
-Set Password
-Confirm Password
+- Set Security Questions From Drop down
+- Set Password
+- Confirm Password
+
 
 	Login()
 
-Get mail , password
-If Forgot Password ask security Question
-If security question’s answer is correct , then move on to reset     password and 
-Set password and re-enter password
-Login Time
+
+- Get userName , password
+- If Forgot Password ask security Question
+- If security question’s answer is correct , then move on to reset password and 
+- Set password and re-enter password
+- Login Time
 	
+
 	chatPersonal()
 
-Select username to connect
-Send request to receiver
-Accept/Decline of request from receiver
-If decline- terminate chat Process
-If Accepts Allow access to Message Table 
+
+- Select userName to connect
+- Write text message or share images 
+  -	-	> Send text or share images
+  -	-	> Receive text or images
+  -	-	> View sent messages.
 
 
+    chatCommunal()
 
-chatCommunal()
 
-Create Space to Make Chat Publically
-Create table for the space with Communal Id
-Set table to have Password for access Messages
-Select the members to the Space
-Make messages that to be stored in Space
+- Create Commune to Make Chat Publicly
+- Commune to have unique name
+- Commune Key be generated
+- Select the members to the Commune by providing a password for the commune and adding users by sharing the group key and password individually. 
+- Send message randomly on choosing the member on commune key and password
+- Users can join the commune
+- Make messages and share thoughts in Commune 
 
-report()
 
-Make report on event(message) to admin 
-Admin to file report and make issue and enquire
+	report()
+
+
+- Make report on event(message) to admin 
+- Admin to file report and make issue and enquire
 Based on enquiry make recommendations 
 Take necessary actions based on the recommendation
 
-admin()
 
-Admin is the user who has the access to view the message and make investigations .
+	admin()
+
+
+- Admin is the user who have the access to view the message and make investigations .
 Recommend the petitioner to do things or ask for final suggestions.
 Final decision made on the message and User to continue in the Commune or chat.
 
@@ -117,16 +134,6 @@ Final decision made on the message and User to continue in the Commune or chat.
 
 
 
-
-To add :
-
-Set reminder
-
-Set Emergency Message
-
-Add Meet call
-
-Set Medical Aid (Basic First Aid kit)
 
 
 
